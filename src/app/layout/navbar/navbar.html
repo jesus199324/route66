@@ -1,0 +1,65 @@
+<header class="nav" [class.nav--scrolled]="scrolled()" [class.nav--open]="menuOpen()">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="#top" aria-label="ROUTE 66 DINER, volver al inicio" (click)="menuOpen.set(false)">
+      <svg class="nav__shield" viewBox="0 0 48 52" aria-hidden="true">
+        <path
+          d="M4 7c8 0 14-3 20-6 6 3 12 6 20 6 0 21-3 34-20 46C7 41 4 28 4 7Z"
+          fill="#F3E6C9"
+          stroke="#191919"
+          stroke-width="3"
+          stroke-linejoin="round"
+        />
+        <path d="M6 15h36" stroke="#191919" stroke-width="2.5" />
+        <text x="24" y="12.5" text-anchor="middle" font-family="Oswald, sans-serif" font-size="6.5" font-weight="700" fill="#191919">
+          ROUTE
+        </text>
+        <text x="24" y="37" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="18" fill="#B92732">66</text>
+      </svg>
+      <span class="nav__wordmark">
+        <span class="nav__name">Route 66</span>
+        <span class="nav__sub">Diner</span>
+      </span>
+    </a>
+
+    <nav class="nav__links" id="nav-links" aria-label="Principal">
+      @for (link of links; track link.href) {
+        <a class="nav__link" [href]="link.href" (click)="menuOpen.set(false)">{{ link.label }}</a>
+      }
+      <span class="nav__status nav__status--mobile" [class.is-open]="hours.status().isOpen">
+        <span class="nav__dot"></span>{{ hours.status().label }}
+      </span>
+    </nav>
+
+    <div class="nav__actions">
+      <span class="nav__status" [class.is-open]="hours.status().isOpen" [title]="hours.status().label">
+        <span class="nav__dot"></span>{{ hours.status().isOpen ? 'Abierto' : 'Cerrado' }}
+      </span>
+
+      <button
+        type="button"
+        class="nav__cart"
+        (click)="openCart()"
+        [attr.aria-label]="'Ver pedido, ' + cart.count() + ' productos'"
+      >
+        <r66-icon name="bag" [size]="20" />
+        <span class="nav__cart-label">Pedido</span>
+        @for (count of [cart.count()]; track count) {
+          @if (count > 0) {
+            <span class="nav__badge">{{ count }}</span>
+          }
+        }
+      </button>
+
+      <button
+        type="button"
+        class="nav__toggle"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="nav-links"
+        [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
+      >
+        <r66-icon [name]="menuOpen() ? 'close' : 'menu'" [size]="24" />
+      </button>
+    </div>
+  </div>
+</header>

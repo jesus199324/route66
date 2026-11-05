@@ -1,0 +1,340 @@
+.hero {
+  position: relative;
+  height: 240vh;
+  /* clip (no hidden) para no romper el position: sticky del contenido */
+  overflow-x: clip;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(212, 166, 74, 0.22), transparent 42%),
+    radial-gradient(rgba(25, 25, 25, 0.07) 1.2px, transparent 1.4px) 0 0 / 18px 18px,
+    var(--cream);
+  --e: 0;
+  --p: 0;
+}
+
+.hero__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--nav-h);
+}
+
+.hero__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+/* ---------- Texto ---------- */
+
+.hero__copy {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  /* el texto se corre suavemente mientras la hamburguesa está desarmada */
+  transform: translateX(calc(var(--e) * -18px));
+  opacity: calc(1 - var(--e) * 0.15);
+  animation: hero-copy-in 0.9s var(--ease-out) backwards;
+}
+
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+.hero__kicker {
+  font-size: 0.78rem;
+}
+
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero__route {
+  font-size: clamp(3.3rem, 7.6vw, 7.2rem);
+  line-height: 0.92;
+  color: var(--cherry);
+  text-shadow:
+    3px 3px 0 var(--black),
+    7px 7px 0 var(--mustard),
+    10px 10px 0 var(--black);
+  white-space: nowrap;
+}
+
+.hero__66 {
+  color: var(--cream);
+  -webkit-text-stroke: 3px var(--black);
+  paint-order: stroke fill;
+}
+
+.hero__diner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.6vw, 2.2rem);
+  letter-spacing: 0.62em;
+  text-transform: uppercase;
+  padding-left: 6px;
+}
+
+.hero__diner::before,
+.hero__diner::after {
+  content: '';
+  flex: 0 0 48px;
+  height: 4px;
+  background: var(--black);
+  border-radius: 2px;
+}
+
+.hero__lead {
+  max-width: 470px;
+  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  color: rgba(25, 25, 25, 0.82);
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin: 8px 0 0;
+  padding: 18px 0 0;
+  list-style: none;
+  border-top: 2px dashed rgba(25, 25, 25, 0.28);
+}
+
+.hero__facts li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+}
+
+.hero__facts r66-icon {
+  color: var(--cherry);
+}
+
+.hero__facts strong {
+  font-weight: 600;
+}
+
+/* ---------- Escenario de la hamburguesa ---------- */
+
+.hero__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: min(100%, 680px);
+  min-height: 460px;
+}
+
+.hero__disc {
+  position: absolute;
+  width: min(86%, 560px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--cherry);
+  border: 4px solid var(--black);
+  box-shadow:
+    0 0 0 10px var(--chrome-2),
+    0 0 0 14px var(--black),
+    12px 14px 0 14px rgba(25, 25, 25, 0.9);
+  transform: scale(calc(1 + var(--e) * 0.08));
+  animation: disc-in 0.9s var(--ease-bounce) backwards;
+}
+
+.hero__disc::after {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border: 3px dashed rgba(243, 230, 201, 0.6);
+  border-radius: 50%;
+}
+
+@keyframes disc-in {
+  from {
+    transform: scale(0.4) rotate(-40deg);
+    opacity: 0;
+  }
+}
+
+.hero__rays {
+  position: absolute;
+  inset: -20%;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.1) 0deg 8deg, transparent 8deg 16deg);
+  animation: spin 60s linear infinite;
+}
+
+.hero__badge {
+  position: absolute;
+  top: 3%;
+  left: 2%;
+  z-index: 1;
+  width: clamp(100px, 11vw, 150px);
+  filter: drop-shadow(4px 4px 0 var(--black));
+  animation:
+    badge-in 0.8s 1.2s var(--ease-bounce) backwards,
+    spin 26s 2s linear infinite;
+}
+
+@keyframes badge-in {
+  from {
+    transform: scale(0) rotate(-120deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero__burger-wrap {
+  position: relative;
+  z-index: 2;
+  width: min(52%, 330px);
+}
+
+.hero__burger {
+  filter: drop-shadow(6px 8px 0 rgba(25, 25, 25, 0.35));
+}
+
+.hero__shadow {
+  width: 92%;
+  height: 22px;
+  margin: 10px auto 0;
+  border-radius: 50%;
+  background: rgba(25, 25, 25, 0.35);
+  filter: blur(4px);
+  transform: scaleX(calc(1 - var(--e) * 0.35));
+  opacity: calc(1 - var(--e) * 0.5);
+}
+
+.hero__hint {
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border: 2px solid var(--black);
+  border-radius: 999px;
+  background: var(--white);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  opacity: calc(1 - var(--e) * 3);
+  animation: hint-in 0.6s 1.6s var(--ease-out) backwards;
+}
+
+.hero__hint r66-icon {
+  animation: nudge 1.4s ease-in-out infinite;
+}
+
+@keyframes hint-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+@keyframes nudge {
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.hero__checker {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 899px) {
+  .hero {
+    height: auto;
+  }
+
+  .hero__sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 28px;
+    gap: 12px;
+  }
+
+  .hero__copy {
+    align-items: center;
+    text-align: center;
+    transform: none;
+    opacity: 1;
+  }
+
+  .hero__route {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .hero__diner {
+    justify-content: center;
+    padding-left: 0;
+  }
+
+  .hero__ctas,
+  .hero__facts {
+    justify-content: center;
+  }
+
+  .hero__stage {
+    min-height: 0;
+    height: auto;
+    aspect-ratio: 1 / 1.05;
+    /* a sangre: deja lugar a las etiquetas de los ingredientes */
+    width: min(100vw, 560px);
+    justify-self: center;
+  }
+
+  .hero__burger-wrap {
+    width: 36%;
+  }
+
+  .hero__badge {
+    width: 92px;
+    top: 0;
+    left: 0;
+  }
+
+  .hero__hint {
+    display: none;
+  }
+}

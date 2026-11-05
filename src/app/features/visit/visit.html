@@ -1,0 +1,93 @@
+<section class="section visit" id="visitanos" aria-labelledby="visit-title">
+  <div class="container">
+    <r66-section-heading
+      r66Reveal
+      eyebrow="Parada obligatoria"
+      title="Visitanos"
+      titleId="visit-title"
+      subtitle="Comé en el salón con rocola, pedí para llevar o recibilo en tu casa."
+    />
+
+    <div class="visit__grid">
+      <div class="visit__card" r66Reveal>
+        <span class="visit__status" [class.is-open]="hours.status().isOpen">
+          <span class="visit__dot"></span>
+          {{ hours.status().label }}
+        </span>
+
+        <ul class="visit__contact">
+          <li>
+            <r66-icon name="pin" [size]="22" />
+            <span>
+              <strong>{{ site.address }}</strong><br />
+              {{ site.city }}
+            </span>
+          </li>
+          <li>
+            <r66-icon name="phone" [size]="22" />
+            <a [href]="chatUrl" target="_blank" rel="noopener">{{ site.phoneDisplay }}</a>
+          </li>
+          <li>
+            <r66-icon name="instagram" [size]="22" />
+            <a [href]="instagramUrl" target="_blank" rel="noopener">&#64;{{ site.instagram }}</a>
+          </li>
+        </ul>
+
+        <table class="hours">
+          <caption class="hours__caption"><r66-icon name="clock" [size]="18" /> Horarios</caption>
+          <tbody>
+            @for (day of schedule; track day.day) {
+              <tr [class.is-today]="day.day === hours.today()">
+                <th scope="row">{{ day.label }}</th>
+                <td>{{ day.range }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <div class="visit__actions">
+          <a class="btn" [href]="mapsUrl" target="_blank" rel="noopener">
+            <r66-icon name="pin" [size]="20" />
+            Cómo llegar
+          </a>
+          <a class="btn btn--cream" [href]="chatUrl" target="_blank" rel="noopener">
+            <r66-icon name="chat" [size]="20" />
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="visit__map" r66Reveal [revealDelay]="120" aria-hidden="true">
+        <svg viewBox="0 0 520 460" preserveAspectRatio="xMidYMid slice">
+          <rect width="520" height="460" fill="#E9DDBE" />
+          <g fill="#DCCDA5">
+            <rect x="24" y="24" width="150" height="110" rx="10" />
+            <rect x="214" y="24" width="120" height="110" rx="10" />
+            <rect x="374" y="24" width="122" height="170" rx="10" />
+            <rect x="24" y="300" width="150" height="136" rx="10" />
+            <rect x="214" y="330" width="282" height="106" rx="10" />
+          </g>
+          <rect x="24" y="174" width="150" height="86" rx="10" fill="#A9C98A" />
+          <circle cx="70" cy="214" r="14" fill="#7FAF5E" />
+          <circle cx="118" cy="230" r="18" fill="#7FAF5E" />
+          <g stroke="#FFFFFF" stroke-width="26" fill="none">
+            <path d="M0 154h520" />
+            <path d="M194 0v460" />
+            <path d="M354 140v190" />
+          </g>
+          <!-- Ruta principal -->
+          <path d="M-20 300C120 300 160 220 260 230S420 300 540 260" stroke="#191919" stroke-width="40" fill="none" />
+          <path d="M-20 300C120 300 160 220 260 230S420 300 540 260" stroke="#D4A64A" stroke-width="3" stroke-dasharray="16 14" fill="none" />
+          <!-- Pin -->
+          <g transform="translate(262 120)">
+            <ellipse cx="0" cy="108" rx="26" ry="8" fill="rgba(25,25,25,.3)" />
+            <path d="M0 106C-20 76-46 56-46 28a46 46 0 0 1 92 0c0 28-26 48-46 78Z" fill="#B92732" stroke="#191919" stroke-width="5" />
+            <circle cx="0" cy="28" r="26" fill="#F3E6C9" stroke="#191919" stroke-width="4" />
+            <text x="0" y="37" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="22" fill="#B92732">66</text>
+          </g>
+        </svg>
+        <span class="visit__map-label stamp stamp--black">Estás a una parada</span>
+      </div>
+    </div>
+  </div>
+</section>

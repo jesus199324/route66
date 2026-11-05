@@ -1,0 +1,49 @@
+<section class="combo" id="combo" aria-labelledby="combo-title">
+  <div class="combo__rays" aria-hidden="true"></div>
+
+  <div class="container combo__grid">
+    <div class="combo__copy" r66Reveal>
+      <span class="eyebrow combo__eyebrow">El combo de la casa</span>
+      <h2 class="display combo__title" id="combo-title">
+        Mother<br />
+        Road
+      </h2>
+      <p class="combo__lead">
+        El viaje completo en una bandeja: nuestra burger más pedida, papas doble cocción y un milkshake a elección.
+      </p>
+
+      <ul class="combo__list">
+        @for (item of includes; track item.id) {
+          <li>
+            <span class="combo__check"><r66-icon name="check" [size]="16" [stroke]="3" /></span>
+            <span class="combo__item-name">{{ item.name }}</span>
+            <span class="combo__item-price">{{ item.price | price }}</span>
+          </li>
+        }
+      </ul>
+
+      <div class="combo__actions">
+        <button type="button" class="btn btn--mustard" (click)="add()">
+          <r66-icon name="bag" [size]="20" />
+          {{ inCart() ? 'Agregar otro' : 'Lo quiero' }}
+        </button>
+        @if (inCart()) {
+          <span class="combo__in-cart">{{ inCart() }} en tu pedido</span>
+        }
+      </div>
+    </div>
+
+    <div class="combo__visual" r66Reveal [revealDelay]="150">
+      <div class="combo__tray" aria-hidden="true"></div>
+      <r66-product-art class="combo__art" [art]="combo.art" />
+
+      <div class="combo__price-tag">
+        <span class="combo__price-label">Solo</span>
+        <span class="combo__price">{{ combo.price | price }}</span>
+        @if (savings) {
+          <span class="combo__save">Ahorrás {{ savings | price }}</span>
+        }
+      </div>
+    </div>
+  </div>
+</section>

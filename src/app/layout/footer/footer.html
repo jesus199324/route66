@@ -1,0 +1,31 @@
+<footer class="footer">
+  <div class="checker-strip" aria-hidden="true"></div>
+
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <span class="footer__logo">Route 66</span>
+      <span class="footer__sub">Diner</span>
+      <p class="footer__tagline">Smash burgers, papas y milkshakes con alma de carretera.</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Pie de página">
+      <h3 class="footer__heading">Explorá</h3>
+      <a href="#menu">Menú</a>
+      <a href="#combo">Combos</a>
+      <a href="#historia">Historia</a>
+      <a href="#visitanos">Visitanos</a>
+    </nav>
+
+    <div class="footer__contact">
+      <h3 class="footer__heading">Seguinos</h3>
+      <a [href]="instagramUrl" target="_blank" rel="noopener"><r66-icon name="instagram" [size]="18" /> &#64;{{ site.instagram }}</a>
+      <a [href]="whatsappUrl" target="_blank" rel="noopener"><r66-icon name="chat" [size]="18" /> {{ site.phoneDisplay }}</a>
+      <span><r66-icon name="pin" [size]="18" /> {{ site.address }}, {{ site.city }}</span>
+    </div>
+  </div>
+
+  <div class="container footer__legal">
+    <span>© {{ year }} {{ site.name }} · Marca ficticia creada como proyecto de portfolio.</span>
+    <span>Diseño y desarrollo: <strong>Alfredo Albornoz</strong></span>
+  </div>
+</footer>

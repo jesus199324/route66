@@ -1,0 +1,68 @@
+<section class="section about" id="historia" aria-labelledby="about-title">
+  <div class="container about__grid">
+    <div class="about__sign" r66Reveal aria-hidden="true">
+      <div class="sign">
+        <div class="sign__bulbs"></div>
+        <span class="sign__top">Bienvenidos a</span>
+        <span class="sign__shield">
+          <svg viewBox="0 0 120 130">
+            <path
+              d="M8 16c22 0 36-7 52-15 16 8 30 15 52 15 0 54-8 86-52 112C16 102 8 70 8 16Z"
+              fill="#F3E6C9"
+              stroke="#191919"
+              stroke-width="6"
+              stroke-linejoin="round"
+            />
+            <path d="M12 38h96" stroke="#191919" stroke-width="5" />
+            <text x="60" y="31" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="15" fill="#191919">
+              U.S. ROUTE
+            </text>
+            <text x="60" y="94" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="48" fill="#B92732">66</text>
+          </svg>
+        </span>
+        <span class="sign__name">Diner</span>
+        <span class="sign__bottom">Burgers · Fries · Shakes</span>
+      </div>
+      <div class="sign__post"></div>
+    </div>
+
+    <div class="about__content">
+      <r66-section-heading
+        r66Reveal
+        align="left"
+        eyebrow="Nuestra historia"
+        title="Sabor de carretera"
+        titleId="about-title"
+      />
+
+      <p class="about__intro" r66Reveal [revealDelay]="80">
+        La Ruta 66 unía Chicago con Santa Mónica, y en cada parada había un diner con la plancha encendida, una rocola
+        sonando y una mesera que te llamaba "honey". Nos enamoramos de esa idea:
+        <strong>comida simple, hecha con obsesión, en un lugar donde te sentís en casa.</strong>
+      </p>
+
+      <ul class="about__pillars">
+        @for (pillar of pillars; track pillar.title; let i = $index) {
+          <li class="pillar" r66Reveal [revealDelay]="120 + i * 90">
+            <span class="pillar__icon"><r66-icon [name]="pillar.icon" [size]="26" /></span>
+            <div>
+              <h3 class="pillar__title">{{ pillar.title }}</h3>
+              <p class="pillar__text">{{ pillar.text }}</p>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <dl class="about__stats" r66Reveal>
+      @for (stat of stats; track stat.label) {
+        <div class="stat">
+          <dt class="stat__value">{{ stat.value }}</dt>
+          <dd class="stat__label">{{ stat.label }}</dd>
+        </div>
+      }
+    </dl>
+  </div>
+</section>

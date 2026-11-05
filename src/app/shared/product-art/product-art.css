@@ -1,0 +1,53 @@
+/*
+ * El host es un contenedor de tamaño: cada ilustración se limita por ancho (cqw) y por alto (cqh),
+ * así siempre entra completa en la caja que le asigne el componente padre.
+ */
+:host,
+.product-art {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  container-type: size;
+}
+
+.art--burger {
+  /* las hamburguesas más altas miden ~1.2× su ancho */
+  width: min(80cqw, 80cqh);
+}
+
+.art--side {
+  width: min(78cqw, 110cqh);
+}
+
+.art--combo {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: min(100cqw, 135cqh);
+}
+
+.combo__burger {
+  position: relative;
+  z-index: 2;
+  width: 54%;
+}
+
+.combo__fries,
+.combo__shake {
+  position: relative;
+  z-index: 1;
+  width: 40%;
+}
+
+.combo__fries {
+  margin-right: -14%;
+  transform: rotate(-8deg);
+}
+
+.combo__shake {
+  margin-left: -12%;
+  transform: rotate(7deg);
+}

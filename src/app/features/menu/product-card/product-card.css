@@ -1,0 +1,165 @@
+:host {
+  display: block;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-hard);
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out);
+}
+
+.card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 var(--black);
+  /* la hamburguesa se "abre" un poco al pasar el mouse (ver BurgerArt) */
+  --e: 0.32;
+}
+
+.card--in-cart {
+  box-shadow: 6px 6px 0 var(--cherry);
+}
+
+.card--in-cart:hover {
+  box-shadow: 9px 9px 0 var(--cherry);
+}
+
+/* ---------- Imagen ---------- */
+
+.card__media {
+  position: relative;
+  display: grid;
+  place-items: end center;
+  height: 250px;
+  padding: 40px 18px 24px;
+  background:
+    repeating-linear-gradient(-45deg, transparent 0 14px, rgba(185, 39, 50, 0.06) 14px 28px),
+    var(--cream-light);
+  border-bottom: var(--border);
+}
+
+.card__plate {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  width: 74%;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--black);
+  box-shadow: inset 0 -6px 0 var(--chrome-2);
+  transform: translateX(-50%);
+}
+
+.card__art {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s var(--ease-bounce);
+}
+
+.card:hover .card__art {
+  transform: translateY(-4px) rotate(-2deg);
+}
+
+.card__tags {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.card__tags .stamp:first-child {
+  transform: rotate(-4deg);
+}
+
+/* ---------- Texto ---------- */
+
+.card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px 22px;
+}
+
+.card__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.card__desc {
+  flex: 1;
+  font-size: 0.92rem;
+  color: rgba(25, 25, 25, 0.72);
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 2px dashed rgba(25, 25, 25, 0.2);
+}
+
+.card__price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--cherry);
+}
+
+/* ---------- Stepper de cantidad ---------- */
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: var(--border);
+  border-radius: 999px;
+  background: var(--cream);
+  box-shadow: var(--shadow-hard-sm);
+  animation: stepper-in 0.3s var(--ease-bounce);
+}
+
+@keyframes stepper-in {
+  from {
+    transform: scale(0.8);
+  }
+}
+
+.stepper__btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color 0.2s;
+}
+
+.stepper__btn:hover {
+  background: var(--mustard);
+}
+
+.stepper__value {
+  min-width: 24px;
+  font-family: var(--font-display);
+  text-align: center;
+}

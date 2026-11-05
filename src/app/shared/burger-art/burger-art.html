@@ -1,0 +1,17 @@
+@for (layer of rendered(); track $index; let i = $index) {
+  <div
+    class="burger__layer"
+    [style.margin-top]="layer.overlap"
+    [style.z-index]="rendered().length - i"
+    [style.--i]="i"
+  >
+    <div class="burger__float" [style.--offset]="layer.offset" [style.--tilt]="layer.tilt">
+      <r66-svg-art [viewBox]="layer.viewBox" [markup]="layer.markup" />
+      @if (labels()) {
+        <span class="burger__label" [class.burger__label--left]="i % 2 === 1"
+          ><span class="burger__chip">{{ layer.label }}</span></span
+        >
+      }
+    </div>
+  </div>
+}

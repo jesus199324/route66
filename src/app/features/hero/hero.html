@@ -1,0 +1,67 @@
+<section class="hero" id="top" #section aria-labelledby="hero-title">
+  <div class="hero__sticky">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <span class="stamp stamp--black hero__kicker">Smash burgers · Fries · Shakes</span>
+
+        <h1 class="hero__title" id="hero-title">
+          <span class="display hero__route">Route <span class="hero__66">66</span></span>
+          <span class="hero__diner">Diner</span>
+        </h1>
+
+        <p class="hero__lead">
+          Hamburguesas smash en plancha de hierro, papas doradas y milkshakes bien espesos.
+          El sabor de la carretera americana, servido en el corazón de Montevideo.
+        </p>
+
+        <div class="hero__ctas">
+          <a class="btn" href="#menu">
+            Ver el menú
+            <r66-icon name="arrowRight" [size]="20" />
+          </a>
+          <button type="button" class="btn btn--cream" (click)="cart.open()">
+            <r66-icon name="bag" [size]="20" />
+            Pedir ahora
+          </button>
+        </div>
+
+        <ul class="hero__facts">
+          <li><r66-icon name="flame" [size]="22" /><span><strong>Smash</strong> en plancha</span></li>
+          <li><r66-icon name="wheat" [size]="22" /><span><strong>Pan brioche</strong> del día</span></li>
+          <li><r66-icon name="milk" [size]="22" /><span><strong>Helado</strong> artesanal</span></li>
+        </ul>
+      </div>
+
+      <div class="hero__stage" #stage>
+        <div class="hero__disc" aria-hidden="true">
+          <div class="hero__rays"></div>
+        </div>
+
+        <svg class="hero__badge" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <path id="hero-badge-circle" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1-148 0" />
+          </defs>
+          <circle cx="100" cy="100" r="96" fill="#D4A64A" stroke="#191919" stroke-width="5" />
+          <circle cx="100" cy="100" r="54" fill="#F3E6C9" stroke="#191919" stroke-width="4" />
+          <text font-family="Oswald, sans-serif" font-size="18" font-weight="700" letter-spacing="2" fill="#191919">
+            <textPath href="#hero-badge-circle" textLength="452" lengthAdjust="spacingAndGlyphs">HECHO A MANO ★ 100% CARNE VACUNA ★</textPath>
+          </text>
+          <text x="100" y="98" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="30" fill="#B92732">66</text>
+          <text x="100" y="122" text-anchor="middle" font-family="Oswald, sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#191919">DINER</text>
+        </svg>
+
+        <div class="hero__burger-wrap">
+          <r66-burger-art class="hero__burger" [layers]="layers" [labels]="true" [drop]="true" [live]="true" [spread]="7" />
+          <div class="hero__shadow" aria-hidden="true"></div>
+        </div>
+
+        <p class="hero__hint" aria-hidden="true">
+          <r66-icon name="arrowDown" [size]="16" />
+          Scrolleá para desarmarla
+        </p>
+      </div>
+    </div>
+
+    <div class="checker-strip hero__checker" aria-hidden="true"></div>
+  </div>
+</section>

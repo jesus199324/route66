@@ -1,0 +1,43 @@
+<article class="card" [class.card--in-cart]="quantity() > 0" [attr.aria-labelledby]="'product-' + product().id">
+  <div class="card__media">
+    <div class="card__plate" aria-hidden="true"></div>
+    <r66-product-art class="card__art" [art]="product().art" />
+
+    @if (tags().length || savings()) {
+      <div class="card__tags">
+        @for (tag of tags(); track tag.label) {
+          <span [class]="'stamp ' + tag.tone">{{ tag.label }}</span>
+        }
+        @if (savings()) {
+          <span class="stamp stamp--cream">Ahorrás {{ savings() | price }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="card__body">
+    <h3 class="card__title" [id]="'product-' + product().id">{{ product().name }}</h3>
+    <p class="card__desc">{{ product().description }}</p>
+
+    <div class="card__footer">
+      <span class="card__price">{{ product().price | price }}</span>
+
+      @if (quantity() > 0) {
+        <div class="stepper" role="group" [attr.aria-label]="'Cantidad de ' + product().name">
+          <button type="button" class="stepper__btn" (click)="decrement()" aria-label="Quitar uno">
+            <r66-icon name="minus" [size]="18" [stroke]="3" />
+          </button>
+          <span class="stepper__value" aria-live="polite">{{ quantity() }}</span>
+          <button type="button" class="stepper__btn" (click)="increment()" aria-label="Agregar uno">
+            <r66-icon name="plus" [size]="18" [stroke]="3" />
+          </button>
+        </div>
+      } @else {
+        <button type="button" class="btn btn--sm card__add" (click)="add()">
+          <r66-icon name="plus" [size]="18" [stroke]="3" />
+          Agregar
+        </button>
+      }
+    </div>
+  </div>
+</article>

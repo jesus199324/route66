@@ -1,0 +1,39 @@
+<section class="section menu" id="menu" aria-labelledby="menu-title">
+  <div class="container">
+    <r66-section-heading
+      r66Reveal
+      eyebrow="La carta"
+      title="El menú"
+      titleId="menu-title"
+      subtitle="Todo se hace al momento: carne aplastada en la plancha bien caliente, pan tostado con manteca y salsas de la casa."
+    />
+
+    <div class="menu__tabs" role="tablist" aria-label="Categorías del menú" r66Reveal [revealDelay]="100">
+      @for (category of menu.categories; track category.id; let i = $index) {
+        <button
+          type="button"
+          role="tab"
+          class="menu__tab"
+          [id]="'tab-' + category.id"
+          [class.is-active]="active() === category.id"
+          [attr.aria-selected]="active() === category.id"
+          [attr.tabindex]="active() === category.id ? 0 : -1"
+          aria-controls="menu-panel"
+          (click)="select(category.id)"
+          (keydown)="onTabKeydown($event, i)"
+        >
+          {{ category.label }}
+          <span class="menu__count">{{ menu.byCategory(category.id).length }}</span>
+        </button>
+      }
+    </div>
+
+    <p class="menu__tagline">{{ activeCategory().tagline }}</p>
+
+    <div class="menu__grid" id="menu-panel" role="tabpanel" [attr.aria-labelledby]="'tab-' + active()">
+      @for (product of products(); track product.id; let i = $index) {
+        <r66-product-card [product]="product" r66Reveal [revealDelay]="i * 70" />
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,224 @@
+.combo {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(80px, 10vw, 130px);
+  background: var(--cherry);
+  color: var(--cream);
+  border-block: 6px solid var(--black);
+}
+
+.combo__rays {
+  position: absolute;
+  top: 50%;
+  left: 72%;
+  width: 180vmax;
+  aspect-ratio: 1;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 255, 255, 0.08) 0deg 7deg, transparent 7deg 14deg);
+  transform: translate(-50%, -50%);
+  animation: rays 90s linear infinite;
+}
+
+@keyframes rays {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.combo__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: clamp(32px, 6vw, 80px);
+}
+
+/* ---------- Texto ---------- */
+
+.combo__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.combo__eyebrow {
+  color: var(--mustard);
+}
+
+.combo__title {
+  font-size: clamp(3.4rem, 9vw, 7rem);
+  line-height: 0.9;
+  color: var(--cream);
+  text-shadow:
+    4px 4px 0 var(--black),
+    8px 8px 0 var(--mustard);
+}
+
+.combo__lead {
+  max-width: 440px;
+  font-size: 1.08rem;
+  color: rgba(243, 230, 201, 0.9);
+}
+
+.combo__list {
+  width: min(100%, 420px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.combo__list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 2px dashed rgba(243, 230, 201, 0.35);
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.combo__check {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  background: var(--mustard);
+  color: var(--black);
+}
+
+.combo__item-name {
+  flex: 1;
+}
+
+.combo__item-price {
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+.combo__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.combo__in-cart {
+  font-family: var(--font-heading);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mustard);
+}
+
+/* ---------- Visual ---------- */
+
+.combo__visual {
+  position: relative;
+  display: grid;
+  place-items: end center;
+  min-height: 420px;
+}
+
+.combo__tray {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 96%;
+  height: 84px;
+  border: 4px solid var(--black);
+  border-radius: 24px 24px 50% 50% / 24px 24px 100% 100%;
+  background: var(--checker);
+  box-shadow: 8px 8px 0 var(--black);
+  transform: translateX(-50%) perspective(400px) rotateX(38deg);
+}
+
+.combo__art {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: clamp(260px, 34vw, 400px);
+  margin-bottom: 34px;
+  filter: drop-shadow(8px 10px 0 rgba(25, 25, 25, 0.35));
+}
+
+.combo__visual:hover {
+  --e: 0.4;
+}
+
+.combo__price-tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 164px;
+  aspect-ratio: 1;
+  border: 4px solid var(--black);
+  border-radius: 50%;
+  background: var(--mustard);
+  color: var(--black);
+  box-shadow: 6px 6px 0 var(--black);
+  transform: rotate(10deg);
+  text-align: center;
+}
+
+.combo__price-tag::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 2px dashed var(--black);
+  border-radius: 50%;
+}
+
+.combo__price-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.combo__price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--cherry);
+}
+
+.combo__save {
+  margin-top: 4px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 860px) {
+  .combo__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .combo__visual {
+    min-height: 0;
+    max-width: 520px;
+    width: 100%;
+    margin-inline: auto;
+    padding-top: 60px;
+  }
+
+  .combo__price-tag {
+    width: 120px;
+  }
+
+  .combo__price {
+    font-size: 1.6rem;
+  }
+}

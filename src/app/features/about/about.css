@@ -1,0 +1,219 @@
+.about {
+  background:
+    linear-gradient(90deg, transparent calc(50% - 1px), rgba(25, 25, 25, 0.05) 50%, transparent calc(50% + 1px)) 0 0 / 48px 48px,
+    var(--cream-light);
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: clamp(40px, 7vw, 100px);
+}
+
+/* ---------- Cartel vintage ---------- */
+
+.about__sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: min(100%, 380px);
+  padding: 40px 30px 34px;
+  border: 5px solid var(--black);
+  border-radius: 46% 46% 22px 22px / 26% 26% 22px 22px;
+  background: var(--cherry);
+  box-shadow:
+    0 0 0 8px var(--chrome-2),
+    0 0 0 12px var(--black),
+    14px 16px 0 12px var(--black);
+  color: var(--cream);
+  text-align: center;
+  transform: rotate(-3deg);
+}
+
+.sign__bulbs {
+  position: absolute;
+  inset: 12px;
+  border-radius: inherit;
+  background: radial-gradient(circle, var(--mustard) 3.5px, transparent 4.5px) 0 0 / 22px 22px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  padding: 10px;
+  animation: bulbs 1.2s steps(2) infinite;
+}
+
+@keyframes bulbs {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.sign__top,
+.sign__bottom {
+  position: relative;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.sign__shield {
+  position: relative;
+  width: 150px;
+  filter: drop-shadow(5px 5px 0 var(--black));
+}
+
+.sign__name {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-shadow: 4px 4px 0 var(--black);
+}
+
+.sign__bottom {
+  padding: 6px 14px;
+  border: 2px solid var(--black);
+  border-radius: 999px;
+  background: var(--black);
+  font-size: 0.8rem;
+}
+
+.sign__post {
+  width: 26px;
+  height: 90px;
+  margin-top: 6px;
+  border: 4px solid var(--black);
+  border-top: 0;
+  background: var(--chrome);
+}
+
+/* ---------- Contenido ---------- */
+
+.about__intro {
+  margin-bottom: 34px;
+  font-size: 1.1rem;
+  color: rgba(25, 25, 25, 0.82);
+}
+
+.about__intro strong {
+  font-weight: 600;
+  color: var(--black);
+  background: linear-gradient(transparent 60%, rgba(212, 166, 74, 0.5) 60%);
+}
+
+.about__pillars {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pillar {
+  display: flex;
+  gap: 18px;
+  padding: 18px 20px;
+  border: var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow-hard-sm);
+}
+
+.pillar__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border: 3px solid var(--black);
+  border-radius: 50%;
+  background: var(--cherry);
+  color: var(--cream);
+}
+
+.pillar__title {
+  margin-bottom: 4px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pillar__text {
+  font-size: 0.95rem;
+  color: rgba(25, 25, 25, 0.75);
+}
+
+/* ---------- Números ---------- */
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: clamp(60px, 8vw, 100px) 0 0;
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--black);
+  box-shadow: var(--shadow-hard);
+}
+
+.stat {
+  padding: 28px 18px;
+  text-align: center;
+  color: var(--cream);
+}
+
+.stat + .stat {
+  border-left: 2px dashed rgba(243, 230, 201, 0.25);
+}
+
+.stat__value {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+  color: var(--mustard);
+}
+
+.stat__label {
+  margin: 8px 0 0;
+  font-family: var(--font-heading);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 860px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__sign {
+    order: 2;
+  }
+
+  .about__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat:nth-child(3) {
+    border-left: 0;
+  }
+
+  .stat:nth-child(n + 3) {
+    border-top: 2px dashed rgba(243, 230, 201, 0.25);
+  }
+}

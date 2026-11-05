@@ -1,0 +1,166 @@
+<div class="drawer" [class.is-open]="cart.isOpen()">
+  <div class="drawer__backdrop" (click)="cart.close()" aria-hidden="true"></div>
+
+  <aside
+    class="drawer__panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cart-title"
+    [attr.aria-hidden]="!cart.isOpen()"
+    [attr.inert]="cart.isOpen() ? null : ''"
+  >
+    <header class="drawer__header">
+      <div>
+        <h2 class="display drawer__title" id="cart-title">Tu pedido</h2>
+        <p class="drawer__count">
+          {{ cart.count() }} {{ cart.count() === 1 ? 'producto' : 'productos' }}
+        </p>
+      </div>
+      <button type="button" class="drawer__close" #closeButton (click)="cart.close()" aria-label="Cerrar pedido">
+        <r66-icon name="close" [size]="22" [stroke]="2.75" />
+      </button>
+    </header>
+
+    @if (cart.isEmpty()) {
+      <div class="drawer__empty">
+        <div class="drawer__empty-art">
+          <r66-product-art [art]="emptyArt" />
+        </div>
+        <h3>Tu bandeja está vacía</h3>
+        <p>Elegí una burger, sumale papas y no te olvides del shake.</p>
+        <button type="button" class="btn" (click)="goToMenu()">
+          Ver el menú
+          <r66-icon name="arrowRight" [size]="20" />
+        </button>
+      </div>
+    } @else {
+      <form class="drawer__body" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <ul class="lines">
+          @for (line of cart.lines(); track line.product.id) {
+            <li class="line">
+              <div class="line__art">
+                <r66-product-art [art]="line.product.art" />
+              </div>
+              <div class="line__info">
+                <span class="line__name">{{ line.product.name }}</span>
+                <span class="line__unit">{{ line.product.price | price }} c/u</span>
+                <div class="line__controls">
+                  <div class="qty" role="group" [attr.aria-label]="'Cantidad de ' + line.product.name">
+                    <button type="button" (click)="cart.decrement(line.product.id)" aria-label="Quitar uno">
+                      <r66-icon name="minus" [size]="16" [stroke]="3" />
+                    </button>
+                    <span>{{ line.quantity }}</span>
+                    <button type="button" (click)="cart.increment(line.product.id)" aria-label="Agregar uno">
+                      <r66-icon name="plus" [size]="16" [stroke]="3" />
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    class="line__remove"
+                    (click)="cart.remove(line.product.id)"
+                    [attr.aria-label]="'Eliminar ' + line.product.name"
+                  >
+                    <r66-icon name="trash" [size]="18" />
+                  </button>
+                </div>
+              </div>
+              <span class="line__total">{{ line.total | price }}</span>
+            </li>
+          }
+        </ul>
+
+        <fieldset class="mode">
+          <legend class="drawer__label">¿Cómo lo querés?</legend>
+          <div class="mode__options">
+            <button
+              type="button"
+              class="mode__option"
+              [class.is-active]="cart.mode() === 'delivery'"
+              [attr.aria-pressed]="cart.mode() === 'delivery'"
+              (click)="setMode('delivery')"
+            >
+              <r66-icon name="truck" [size]="22" />
+              <span>Delivery<small>{{ delivery.eta }}</small></span>
+            </button>
+            <button
+              type="button"
+              class="mode__option"
+              [class.is-active]="cart.mode() === 'pickup'"
+              [attr.aria-pressed]="cart.mode() === 'pickup'"
+              (click)="setMode('pickup')"
+            >
+              <r66-icon name="store" [size]="22" />
+              <span>Retiro<small>Sin costo</small></span>
+            </button>
+          </div>
+        </fieldset>
+
+        @if (cart.mode() === 'delivery') {
+          <div class="free-ship" [class.is-done]="cart.totals().missingForFreeDelivery === 0">
+            @if (cart.totals().missingForFreeDelivery > 0) {
+              <p>Te faltan <strong>{{ cart.totals().missingForFreeDelivery | price }}</strong> para el envío gratis</p>
+            } @else {
+              <p><strong>¡Envío gratis!</strong> Tu pedido viaja sin costo.</p>
+            }
+            <div class="free-ship__bar"><span [style.width.%]="freeDeliveryProgress()"></span></div>
+          </div>
+        }
+
+        <div class="fields">
+          <label class="field">
+            <span class="drawer__label">Nombre</span>
+            <input type="text" formControlName="name" autocomplete="name" placeholder="¿A nombre de quién?" />
+            @if (hasError('name')) {
+              <span class="field__error">Contanos tu nombre</span>
+            }
+          </label>
+
+          @if (cart.mode() === 'delivery') {
+            <label class="field">
+              <span class="drawer__label">Dirección</span>
+              <input
+                type="text"
+                formControlName="address"
+                autocomplete="street-address"
+                placeholder="Calle, número, apto"
+              />
+              @if (hasError('address')) {
+                <span class="field__error">Necesitamos la dirección para el envío</span>
+              }
+            </label>
+          }
+
+          <label class="field">
+            <span class="drawer__label">Notas <small>(opcional)</small></span>
+            <textarea formControlName="notes" rows="2" placeholder="Sin cebolla, punto de la carne, timbre…"></textarea>
+          </label>
+        </div>
+
+        <dl class="summary">
+          <div>
+            <dt>Subtotal</dt>
+            <dd>{{ cart.totals().subtotal | price }}</dd>
+          </div>
+          @if (cart.mode() === 'delivery') {
+            <div>
+              <dt>Envío</dt>
+              <dd>{{ cart.totals().deliveryFee === 0 ? 'Gratis' : (cart.totals().deliveryFee | price) }}</dd>
+            </div>
+          }
+          <div class="summary__total">
+            <dt>Total</dt>
+            <dd>{{ cart.totals().total | price }}</dd>
+          </div>
+        </dl>
+
+        <div class="drawer__footer">
+          <button type="submit" class="btn btn--block">
+            <r66-icon name="chat" [size]="20" />
+            Enviar pedido por WhatsApp
+          </button>
+          <button type="button" class="drawer__clear" (click)="clear()">Vaciar pedido</button>
+        </div>
+      </form>
+    }
+  </aside>
+</div>

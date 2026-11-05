@@ -1,0 +1,13 @@
+@if (burgerLayers(); as layers) {
+  <r66-burger-art class="art art--burger" [layers]="layers" [spread]="5" />
+}
+@if (side(); as s) {
+  <r66-svg-art class="art art--side" [viewBox]="s.viewBox" [markup]="s.markup" />
+}
+@if (combo(); as c) {
+  <div class="art art--combo">
+    <r66-svg-art class="combo__fries" [viewBox]="c.fries.viewBox" [markup]="c.fries.markup" />
+    <r66-burger-art class="combo__burger" [layers]="c.layers" [spread]="5" />
+    <r66-svg-art class="combo__shake" [viewBox]="c.shake.viewBox" [markup]="c.shake.markup" />
+  </div>
+}

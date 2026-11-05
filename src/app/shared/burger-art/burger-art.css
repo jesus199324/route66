@@ -1,0 +1,119 @@
+:host,
+.burger {
+  display: block;
+  position: relative;
+  container-type: inline-size;
+}
+
+.burger__layer {
+  position: relative;
+}
+
+.burger__float {
+  position: relative;
+  transform: translateY(calc(var(--e, 0) * var(--offset) * 1cqw)) rotate(calc(var(--e, 0) * var(--tilt) * 1deg));
+  transition: transform 0.45s var(--ease-bounce, ease);
+  will-change: transform;
+}
+
+.burger--live .burger__float,
+.burger--live .burger__label {
+  transition: none;
+}
+
+/* ---------- Etiquetas de ingredientes ---------- */
+
+.burger__label {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 4cqw);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(0.58rem, 3.6cqw, 1rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--black);
+  opacity: clamp(0, calc((var(--e, 0) - 0.35) * 2.5), 1);
+  transform: translate(calc((1 - var(--e, 0)) * -12px), -50%);
+  pointer-events: none;
+}
+
+.burger__label::before {
+  content: '';
+  width: 6cqw;
+  height: 2px;
+  background: var(--black);
+}
+
+.burger__chip {
+  padding: 3px 10px;
+  border: 2px solid var(--black);
+  border-radius: 999px;
+  background: var(--cream);
+  box-shadow: 2px 2px 0 var(--black);
+}
+
+.burger__label--left {
+  left: auto;
+  right: calc(100% + 4cqw);
+  flex-direction: row-reverse;
+  transform: translate(calc((1 - var(--e, 0)) * 12px), -50%);
+}
+
+/* ---------- Animación de entrada ---------- */
+
+.burger--drop .burger__layer {
+  animation: burger-drop 0.75s var(--ease-bounce, ease) both;
+  animation-delay: calc((var(--n) - var(--i)) * 110ms + 150ms);
+}
+
+@keyframes burger-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-70vh) rotate(-6deg);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hamburguesas chicas (mobile): etiquetas más compactas */
+@container (max-width: 240px) {
+  .burger__label {
+    left: calc(100% + 2cqw);
+    letter-spacing: 0.04em;
+    gap: 3px;
+  }
+
+  .burger__label--left {
+    left: auto;
+    right: calc(100% + 2cqw);
+  }
+
+  .burger__label::before {
+    width: 3cqw;
+  }
+
+  .burger__chip {
+    padding: 2px 7px;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burger__float {
+    transform: none;
+  }
+  .burger__label {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
